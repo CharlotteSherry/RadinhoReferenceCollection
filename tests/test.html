@@ -1,0 +1,22 @@
+<script src="../index.js"></script>
+<div id="results"></div>
+<script>
+    function showMessage(message, style) {
+        const p = document.createElement("p");
+        p.style = style
+        p.innerText = message;
+        document.getElementById("results").appendChild(p);
+    }
+    function showSuccess(message = "success") {
+        showMessage(message, "color: green;");
+    }
+    function showError(message = "error") {
+        showMessage(message, "color: red;");
+    }
+    try { showMessage("send() with url empty"); myFetchApi().send(); showError(); } catch (e) { showSuccess(e) }
+    try { showMessage("send() with load callback null"); myFetchApi().send("https://website.com"); showError(); } catch (e) { showSuccess(e) }
+    try { showMessage("send() with error callback null"); myFetchApi().send("https://website.com", ()=>{}); showError(); } catch (e) { showSuccess(e) }
+    myFetchApi().send("https://jsonplaceholder.typicode.com/todos/1", ()=>{ showMessage("send() with all parameters correct"); showSuccess(); }, e=>{ showMessage("send() with all parameters correct"); showError(e); });
+    myFetchApi().send("https://jsonplaceholder-ERROR.typicode.com/todos/1", ()=>{ showMessage("send() with wrong url"); showError(); }, e=>{ showMessage("send() with wrong url"); showSuccess(e); });
+
+</script>

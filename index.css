@@ -1,0 +1,84 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin: 25px;
+    color: #444;
+}
+
+.value {
+    font-weight: bold;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#colunms {
+    display: flex;
+}
+
+#right {
+    flex: 4;
+}
+
+#header-data>div {
+    margin-right: 20px;
+}
+
+#update-div{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#update{
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    border-radius: 3px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+#update:disabled{
+    background: rgba(165, 164, 164, 0.6);
+}
+
+#link-list {
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+}
+
+.hostname{
+    padding: 5px 0;
+}
+
+.percentage {
+    font-size: small;
+}
+
+#link-chart {
+    flex: 4;
+}
+
+.ct-series-a .ct-bar {
+    /* Colour of your bars */
+    stroke: #dd3b3b !important;
+    stroke-width: 30;
+}
+
+.ct-label {
+    font-weight: bold;
+    color: black !important;
+}
+
+footer{
+    text-align: center;
+    font-size: small;
+}

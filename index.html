@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>radinhodepilha's Reference Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link href="./index.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+    <script src="./mocks/dates.js"></script>
+    <script src="./mocks/links.js"></script>
+
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="title">radinhodepilha's Reference Collection</div>
+        <p>One-month statistics of the references on the <a href="https://radinhodepilha.com" target="_blank">radinhodepilha.com</a> website.</p>
+    </header>
+
+    <div id="colunms">
+        <div id="left">
+            <div id="header-data">
+                <div id="page-number"> </div>
+                <div id="date-interval"> </div>
+                <div id="total-links"> </div>
+                <div id="update-div">
+                    <button id="update">Update</button>
+                </div>
+                <div id="error"> </div>
+            </div>
+            <div id="link-list"> </div>
+
+        </div>
+        <div id="right">
+            <div id="link-chart">
+                <div class="ct-chart ct-perfect-fourth"></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>2020 @ <a href="https://alexandrebelloni.com" target="_blank">alexandrebelloni.com</a></p>
+    </footer>
+
+    <script>
+        window.onload = () => {
+            const obj = document.getElementById('update');
+            obj.addEventListener("click", e => {
+                obj.disabled = true;
+                getStatistics(true, () => obj.disabled = false);
+            });
+            getStatistics();
+        }
+    </script>
+</body>
+
+</html>
