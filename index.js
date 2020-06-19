@@ -14,15 +14,20 @@ function showDates() {
   document.querySelector("#date-interval").innerHTML =
     `<p>From: <span class="value">${formatDate(dates[dates.length - 1])}</span> To: <span class="value">${formatDate(dates[0])}</span></p>`
 }
+
+function showImages() {
+  const imgs = images.map(img => `<img src="${img}"/>`).join('');
+  document.querySelector("#gallery").innerHTML = imgs
+}
 // -----
 
-let dates = [], links = [];
+let dates = [], links = [], images = [];
 const maxPageNumber = 8;
 let currentPageNumber = 0;
 
 //Main Method -----------
 function getStatistics(isOnline, callback) {
-  dates = []; links = [];
+  dates = []; links = []; images = [];
   currentPageNumber = 0;
   document.querySelector("#error").innerHTML = '';
 
@@ -52,6 +57,12 @@ function getStatistics(isOnline, callback) {
 function show() {
   showPageNumber();
   showDates();
+
+  new Promise((resolve, reject) => {
+    showImages();
+    resolve();
+  }).then();
+
   links = links.sort((a, b) => b.count - a.count);
   const total = links.reduce((previous, current) => previous.count || previous + current.count);
   showTotalOfLinks(total);
@@ -120,17 +131,26 @@ function registerAllLinks(doc) {
   }
 }
 
+function registerAllImages(doc) {
+  const elements = doc.getElementsByTagName("img");
+  for (let i = 0; i < elements.length; ++i) {
+    const src = elements[i].getAttribute("src")
+    if (!images.find(img => img === src) && ["https://radinhodepilha.com/wp-content/uploads/2016/02/radinho_logo_type.png"].indexOf(src) === -1)
+      images.push(src);
+  }
+}
+
 //Request pages
 const myFetchApi = () => {
   function send(url, load, error) {
     if (!url) throw "url string is required";
     if (!load) throw "load callback is required";
     if (!error) throw "error callback is required";
-    
+
     fetch(url).
       then(res => res.text()).
       then(text => {
-        if(text.indexOf("TypeError") > -1){ error(text); return }
+        if (text.indexOf("TypeError") > -1) { error(text); return }
         const doc = new DOMParser().parseFromString(text, 'text/html');
         load(doc);
       }).
@@ -149,6 +169,8 @@ function getStatistic(page, callback) {
     registerAllDates(doc);
 
     registerAllLinks(doc);
+
+    registerAllImages(doc);
 
     if (currentPageNumber < maxPageNumber) {
       getStatistic(currentPageNumber + 1, callback);
