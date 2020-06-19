@@ -98,7 +98,7 @@ function normalizeHostname(hostname) {
 
 function isWhiteListItem(hostname) {
   return ["youtu.be", "usina.com", "radinhodepilha.com", "twitter.com", "wordpress.org", "colorlib.com",
-    "soundcloud.com", "podcasts.apple.com", "google.com", "subscribeonandroid.com", "subscribebyemail.com",
+    "soundcloud.com", "podcasts.apple.com", "google.com", "subscribeonandroid.com", "subscribebyemail.com", "ko-fi.com",
     "getpocket.com", "media.blubrry.com", "127.0.0.1:5500", "instagram.com", "pca.st", "radinhorefcollection.netlify.app"
   ].indexOf(hostname) === -1
 }
